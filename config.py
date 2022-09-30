@@ -1,4 +1,4 @@
-from modules.bar import screens, widget_defaults, extension_defaults # type: ignore
+from modules.bar import screens, widget_defaults, extension_defaults  # type: ignore
 
 from libqtile import layout, hook
 from libqtile.config import Click, Drag, Group, Key, Match
@@ -15,13 +15,14 @@ def autostart():
 
 
 mod = "mod4"
-terminal = "kitty"
+terminal = "alacritty"
 
 keys = [
     # A list of available commands that can be bound to keys can be found
     # at https://docs.qtile.org/en/latest/manual/config/lazy.html
     # Switch between windows
-    Key([mod], "space", lazy.layout.next(), desc="Move window focus to other window"),
+    Key([mod], "space", lazy.layout.next(),
+        desc="Move window focus to other window"),
     Key([mod], "h", lazy.layout.left()),
     Key([mod], "l", lazy.layout.right()),
     Key([mod], "j", lazy.layout.down()),
@@ -67,7 +68,8 @@ keys = [
     Key([mod], "q", lazy.window.kill(), desc="Kill focused window"),
     Key([mod, "control"], "r", lazy.reload_config(), desc="Reload the config"),
     Key([mod, "control"], "q", lazy.shutdown(), desc="Shutdown Qtile"),
-    Key([mod], "r", lazy.spawn("rofi -show drun"), desc="Spawn a command using Rofi"),
+    Key([mod], "r", lazy.spawn("rofi -show drun"),
+        desc="Spawn a command using Rofi"),
 
     # Applications
     Key([mod], "Return", lazy.spawn(terminal), desc="Launch terminal"),
@@ -102,7 +104,8 @@ for i in groups:
                 [mod, "shift"],
                 i.name,
                 lazy.window.togroup(i.name, switch_group=True),
-                desc="Switch to & move focused window to group {}".format(i.name),
+                desc="Switch to & move focused window to group {}".format(
+                    i.name),
             ),
             # Or, use below if you prefer not to switch to that group.
             # # mod1 + shift + letter of group = move focused window to group
@@ -113,7 +116,8 @@ for i in groups:
 
 layouts = [
     # layout.Columns(border_focus_stack=["#d75f5f", "#8f3d3d"], border_width=4),
-    layout.MonadTall(margin=4, border_focus="#d75f5f", border_normal="#2c5380"),
+    layout.MonadTall(margin=4, border_focus="#d75f5f",
+                     border_normal="#2c5380"),
     layout.Max(),
     # Try more layouts by unleashing below layouts.
     # layout.Stack(num_stacks=2),
@@ -130,8 +134,10 @@ layouts = [
 
 # Drag floating layouts.
 mouse = [
-    Drag([mod], "Button1", lazy.window.set_position_floating(), start=lazy.window.get_position()),
-    Drag([mod], "Button3", lazy.window.set_size_floating(), start=lazy.window.get_size()),
+    Drag([mod], "Button1", lazy.window.set_position_floating(),
+         start=lazy.window.get_position()),
+    Drag([mod], "Button3", lazy.window.set_size_floating(),
+         start=lazy.window.get_size()),
     Click([mod], "Button2", lazy.window.bring_to_front()),
 ]
 
@@ -150,9 +156,9 @@ floating_layout = layout.Floating(
         Match(wm_class="ssh-askpass"),  # ssh-askpass
         Match(title="branchdialog"),  # gitk
         Match(title="pinentry"),  # GPG key password entry
-        Match(wm_class="pavucontrol"), # pulse audio control
-        Match(wm_class="xfce4-power-manager-settings"), # power management
-        Match(wm_class="thunar"), # Thunar file manager
+        Match(wm_class="pavucontrol"),  # pulse audio control
+        Match(wm_class="xfce4-power-manager-settings"),  # power management
+        Match(wm_class="thunar"),  # Thunar file manager
     ]
 )
 auto_fullscreen = True
